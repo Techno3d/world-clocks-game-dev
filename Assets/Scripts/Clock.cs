@@ -23,6 +23,13 @@ public class Clock : MonoBehaviour
     public string IanaCode = "UTC";
     public string text;
     float hoursToDegree = -30f, minutesToDegrees = -6f, secondsToDegrees = -6f;
+    Dictionary<String, float> fallBackZones = new Dictionary<string, float>(){
+        {"UTC", 0f},
+        {"America/New_York", -4f},
+        {"Asia/Dhaka", 6f},
+        {"Asia/Tokyo", 9f},
+        {"Europe/London", 0f}
+    };
     
     // Start is called before the first frame update
     void Start()
@@ -33,8 +40,15 @@ public class Clock : MonoBehaviour
     void Update()
     {
         DateTime time = DateTime.UtcNow;
-        TimeZoneInfo current = TimeZoneInfo.FindSystemTimeZoneById(IanaCode);
-        time = TimeZoneInfo.ConvertTime(time, current);
+        try
+        {
+            TimeZoneInfo current = TimeZoneInfo.FindSystemTimeZoneById(IanaCode);
+            time = TimeZoneInfo.ConvertTime(time, current);
+        }
+        catch (Exception)
+        {
+            time.AddHours(fallBackZones[IanaCode]);
+        }
         TimeSpan timeSpan = time.TimeOfDay;
         hoursPivot.localRotation = Quaternion.Euler(0f, 0f, hoursToDegree * (float)timeSpan.TotalHours);
         minutePivot.localRotation = Quaternion.Euler(0f, 0f, minutesToDegrees * (float)timeSpan.TotalMinutes);

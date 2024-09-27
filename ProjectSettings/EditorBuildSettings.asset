@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/WorldClocks.unity
+    guid: 919e36b2ac7dfc24e9d8291851304d40
   m_configObjects: {}
