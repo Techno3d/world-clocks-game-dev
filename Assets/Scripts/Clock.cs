@@ -31,12 +31,6 @@ public class Clock : MonoBehaviour
         {"Europe/London", 0f}
     };
     
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
     void Update()
     {
         DateTime time = DateTime.UtcNow;
@@ -45,18 +39,24 @@ public class Clock : MonoBehaviour
             TimeZoneInfo current = TimeZoneInfo.FindSystemTimeZoneById(IanaCode);
             time = TimeZoneInfo.ConvertTime(time, current);
         }
-        catch (Exception)
+        catch (Exception) // If on web, fall back, but no daylights savings time
         {
-            time.AddHours(fallBackZones[IanaCode]);
+            time = time.AddHours(fallBackZones[IanaCode]);
         }
         TimeSpan timeSpan = time.TimeOfDay;
+        // Rotation based on time
         hoursPivot.localRotation = Quaternion.Euler(0f, 0f, hoursToDegree * (float)timeSpan.TotalHours);
         minutePivot.localRotation = Quaternion.Euler(0f, 0f, minutesToDegrees * (float)timeSpan.TotalMinutes);
         secondPivot.localRotation = Quaternion.Euler(0f, 0f, secondsToDegrees * (float)timeSpan.TotalSeconds);
+        
+        // Where and what time
+        // Sorry for cursed ternary
         nameText.text = text + "\n" + (timeSpan.Hours/10==0? "0"+timeSpan.Hours : timeSpan.Hours) + 
             ":" + (timeSpan.Minutes/10==0 ? "0"+timeSpan.Minutes : timeSpan.Minutes) + 
             ":" + (timeSpan.Seconds/10==0 ? "0" + timeSpan.Seconds : timeSpan.Seconds);
-        if (timeSpan.TotalHours> 0 && timeSpan.TotalHours < 6 || timeSpan.TotalHours > 20)
+        
+        // Daytime/Nighttime indicator
+        if (timeSpan.TotalHours > 0 && timeSpan.TotalHours < 6 || timeSpan.TotalHours > 20)
         {
             clock.GetComponent<MeshRenderer>().material.color = Color.black;
             hoursHand.GetComponent<MeshRenderer>().material.color = Color.white;

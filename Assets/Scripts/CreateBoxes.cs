@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+// Ignore, this isn't for clocks
 public class CreateBoxes : MonoBehaviour
 {
     public int gridSize = 40;

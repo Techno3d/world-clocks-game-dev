@@ -6,7 +6,7 @@ using UnityEngine;
 public class AddClocks : MonoBehaviour
 {
     [SerializeField]
-    GameObject funny;
+    GameObject clockPrefab;
     [SerializeField]
     float seperation = 10f;
     [SerializeField]
@@ -16,19 +16,22 @@ public class AddClocks : MonoBehaviour
     [SerializeField]
     string[] timeZones = new string[]{};
     List<GameObject> clocks = new();
-    // Start is called before the first frame update
+
     void Start()
     {
         int i = 0;
         float initOffset = columns*seperation/4f;
         foreach(string zone in timeZones)
         {
+            // Current row is the index divided by the # of columns
             int curRow = i/columns;
+            // Current row is the index modulo by the # of columns (whats left of a row)
             int curColumn = i%columns;
+            // This is to insure that any odd number row is centered
             if(i/columns == timeZones.Length/columns && timeZones.Length%columns!=0) {
-                initOffset = columns*seperation/4f - seperation/2f;
+                initOffset = columns*seperation/4f - seperation*(columns-timeZones.Length%columns)/2f;
             }
-            GameObject clock = Instantiate(funny, new Vector3(curColumn*seperation - initOffset, -curRow*(seperation+5) + 10, 0) + transform.position, Quaternion.identity, transform);
+            GameObject clock = Instantiate(clockPrefab, new Vector3(curColumn*seperation - initOffset, -curRow*(seperation+5) + 10, 0) + transform.position, Quaternion.identity, transform);
             Clock clockcode = clock.GetComponent<Clock>();
             clockcode.IanaCode = zone;
             clockcode.text = zoneNames[i];

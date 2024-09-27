@@ -631,7 +631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d3c8f7adb55494f9f3fa9fc7200a2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  funny: {fileID: 7316303640197292517, guid: 1a03f0e60b07c7c47b5b6145a345a073, type: 3}
+  clockPrefab: {fileID: 7316303640197292517, guid: 1a03f0e60b07c7c47b5b6145a345a073, type: 3}
   seperation: 15
   columns: 3
   zoneNames:
