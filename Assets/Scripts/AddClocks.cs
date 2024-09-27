@@ -10,7 +10,9 @@ public class AddClocks : MonoBehaviour
     [SerializeField]
     float seperation = 10f;
     [SerializeField]
-    int rows = 1;
+    int columns = 1;
+    [SerializeField]
+    string[] zoneNames = new string[]{"", "", "", "", ""};
     [SerializeField]
     float[] timeZones = new float[]{0, -5, 6, 4, 2 };
     List<GameObject> clocks = new();
@@ -18,15 +20,17 @@ public class AddClocks : MonoBehaviour
     void Start()
     {
         int i = 0;
-        int cols = timeZones.Length / rows + 1;
-        float initOffset = seperation*((float)timeZones.Length)/-2f - 10f - seperation;
+        float initOffset = columns*seperation/4f;
         foreach(float zone in timeZones)
         {
-            i++;
-            GameObject clock = Instantiate(funny, new Vector3(-1f*timeZones.Length/2f*seperation + i%cols * seperation, -i/cols*seperation, 0), Quaternion.identity, this.transform);
+            int curRow = i/columns;
+            int curColumn = i%columns;
+            GameObject clock = Instantiate(funny, new Vector3(curColumn*seperation - initOffset, -curRow*(seperation+5) + 10, 0), Quaternion.identity, this.transform);
             Clock clockcode = clock.GetComponent<Clock>();
             clockcode.UtcOffset = zone;
+            clockcode.text = zoneNames[i];
             clocks.Add(clock);
+            i++;
         }
     }
 

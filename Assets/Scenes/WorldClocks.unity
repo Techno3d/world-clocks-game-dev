@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.14124501, g: 0.15499546, b: 0.1522137, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -248,11 +247,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   funny: {fileID: 7316303640197292517, guid: 1a03f0e60b07c7c47b5b6145a345a073, type: 3}
   seperation: 15
-  rows: 1
+  columns: 3
+  zoneNames:
+  - UTC
+  - New York
+  - Dhaka
+  - Tokyo
+  - London
   timeZones:
   - 0
-  - -5
+  - -4
   - 6
+  - 9
+  - 1
 --- !u!4 &892263429
 Transform:
   m_ObjectHideFlags: 0
@@ -354,7 +361,7 @@ Transform:
   m_GameObject: {fileID: 1720390839}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -20}
+  m_LocalPosition: {x: 0, y: 1, z: -55.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
