@@ -1912,11 +1912,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clock: {fileID: 1472821353373154023}
+  hoursHand: {fileID: 3284847203560160167}
+  minutesHand: {fileID: 975629224934001600}
   hoursPivot: {fileID: 1984584686050550418}
   minutePivot: {fileID: 9187191388432304796}
   secondPivot: {fileID: 1350197802486144356}
   nameText: {fileID: 5549717900283445597}
-  UtcOffset: 0
+  IanaCode: UTC
   text: UTC\nIdk
 --- !u!1 &8099143558153576630
 GameObject:
